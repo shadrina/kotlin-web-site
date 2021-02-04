@@ -139,3 +139,21 @@ All reduce operations throw an exception on empty collections. To receive `null`
 * [`reduceRightOrNull()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/reduce-right-or-null.html)
 * [`reduceIndexedOrNull()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/reduce-indexed-or-null.html)
 * [`reduceRightIndexedOrNull()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/reduce-right-indexed-or-null.html)
+
+For cases where you want to save intermediate accumulator values, there are functions
+[`runningFold()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/runningFold.html) (or [`scan()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/scan.html)) 
+and [`runningReduce()`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/runningReduce.html).
+
+```kotlin
+
+fun main() {
+    //sampleStart
+    val numbers = listOf(0, 1, 2, 3, 4, 5)
+    val runningReduceSum = numbers.runningReduce { sum, item -> sum + item }
+    val runningFoldSum = numbers.runningFold(10) { sum, item -> sum + item }
+    //sampleEnd
+    println(runningReduceSum.toString())
+    println(runningFoldSum.toString())
+}
+```
+{kotlin-runnable="true" kotlin-min-compiler-version="1.3"}
